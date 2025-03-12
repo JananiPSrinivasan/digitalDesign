@@ -1,0 +1,16 @@
+#
+# Edit Lock-Stake file. CAUTION: Please do not change.
+#
+# Information about current Edit Lock Owner.
+#
+LockStakeVersion               1.1
+LoginName                      jsrinivasan4020
+HostName                       volta
+ProcessIdentifier              3629634
+ProcessCreationTime_UTC        1731109481
+ProcessCreationTime_Readable   Fri Nov  8 15:44:41 2024 PST
+AppIdentifier                  OA File System Design Manager
+OSType                         unix
+ReasonForPlacingEditLock       OpenAccess edit lock
+FilePathUsedToEditLock         /home/jsrinivasan4020/vlsi/CMOS/OR2/symbol/symbol.oa.cdslck
+TimeEditLocked                 Fri Nov  8 18:08:41 2024 PST
