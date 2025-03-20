@@ -1,0 +1,18 @@
+** sch_path: /home/oneapi/BasicsOfVLSI/xschem/rclpf.sch
+**.subckt rclpf
+R1 VOUT VIN 1k m=1
+C1 VOUT GND 1p m=1
+V1 VIN GND PULSE(0 1 0.5NS 100p 100p 1NS 2NS 5)
+**** begin user architecture code
+
+
+
+.tran 100p 10n
+.save all
+
+
+
+**** end user architecture code
+**.ends
+.GLOBAL GND
+.end
