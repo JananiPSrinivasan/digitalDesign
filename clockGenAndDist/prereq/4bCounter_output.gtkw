@@ -1,0 +1,26 @@
+[*]
+[*] GTKWave Analyzer v3.3.104 (w)1999-2020 BSI
+[*] Sat Apr  5 05:13:58 2025
+[*]
+[dumpfile] "/home/janani/BasicsOfVLSI/clockGenAndDist/prereq/counter_tb.vcd"
+[dumpfile_mtime] "Sat Apr  5 05:12:23 2025"
+[dumpfile_size] 1450
+[savefile] "/home/janani/BasicsOfVLSI/clockGenAndDist/prereq/4bCounter_output.gtkw"
+[timestart] 0
+[size] 1920 1009
+[pos] -191 -191
+*-16.000000 165000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[sst_width] 214
+[signals_width] 252
+[sst_expanded] 1
+[sst_vpaned_height] 295
+@28
+counter_tb.clk
+@22
+counter_tb.count[3:0]
+@28
+counter_tb.enable
+@29
+counter_tb.rst
+[pattern_trace] 1
+[pattern_trace] 0
