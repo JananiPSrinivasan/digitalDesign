@@ -1,32 +1,22 @@
-## Digital Design
-- This reposiory showcases my basics in VLSI deisgn. 
+# Digital Design
 
-### Verilog Basics
+This repository contains small Verilog modules and schematics demonstrating
+fundamental concepts in digital design and VLSI.
 
-- The folder contains the "Hello world" programs of Digital Design
-- The main purpose of this folder is to understand  
-    - Print 
-    - Datatypes
-    - Operators
-    - Slicing 
+## Repository Structure
+- `verilogBasics/` – Simple “Hello world” programs for learning Verilog syntax
+  (datatypes, operators, slicing, etc.). Each folder contains simulation scripts.
+- `combinatorialCircuits/` – Examples such as adders, subtractors, encoders,
+  decoders, comparators, multiplexers, and a simple ALU. Many subfolders include
+  ModelSim TCL scripts for running simulations.
+- `sequentialCircuits/` – Clock‑related designs (e.g., `clockGenAndDist`) with a
+  detailed README describing clock division, gating, DLL/CDR concepts, and more.
+- `schematics_basic_gates/` – Cadence schematics and testbenches for gates like
+  NAND, NOR, XOR, and basic circuits such as inverters and ring oscillators.
 
-### Combinatorial Circuits
-
-- Basic Combinatorial blocks
-    - Adders
-    - Subtractors
-    - Encoders
-    - Decoders
-    - Comparators
-    - Multiplexers
-    - ALU
-
-### Sequential Circuits
-
-- Basic Sequential blocks
-    - Clock generators
-    - D Latch
-    - D Flipflop
-    - Shift registers
-    - Counters
-    - Clock dividers
+## Running Simulations
+1. Install ModelSim (or any tool supporting `vlog`/`vsim`).
+2. Navigate to a module directory (e.g., `combinatorialCircuits/adders/treeadder`).
+3. Run the provided script:
+   ```bash
+   vsim -do run_treeAdder.tcl
