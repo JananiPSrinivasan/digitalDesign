@@ -1,0 +1,75 @@
+$date
+	Fri Jun 27 16:07:21 2025
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ns
+$end
+$scope module clkgen $end
+$var parameter 32 ! HALF_PERIOD_CLK1 $end
+$var real 1 " HALF_PERIOD_CLK2 $end
+$var reg 1 # clk1 $end
+$var reg 1 $ clk2 $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+r2.5 "
+b101 !
+$end
+#0
+$dumpvars
+0$
+0#
+$end
+#3
+1$
+#5
+1#
+#6
+0$
+#9
+1$
+#10
+0#
+#12
+0$
+#15
+1$
+1#
+#18
+0$
+#20
+0#
+#21
+1$
+#24
+0$
+#25
+1#
+#27
+1$
+#30
+0$
+0#
+#33
+1$
+#35
+1#
+#36
+0$
+#39
+1$
+#40
+0#
+#42
+0$
+#45
+1$
+1#
+#48
+0$
+#50
+0#
