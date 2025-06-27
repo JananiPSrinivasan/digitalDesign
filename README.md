@@ -13,10 +13,3 @@ fundamental concepts in digital design and VLSI.
   detailed README describing clock division, gating, DLL/CDR concepts, and more.
 - `schematics_basic_gates/` – Cadence schematics and testbenches for gates like
   NAND, NOR, XOR, and basic circuits such as inverters and ring oscillators.
-
-## Running Simulations
-1. Install ModelSim (or any tool supporting `vlog`/`vsim`).
-2. Navigate to a module directory (e.g., `combinatorialCircuits/adders/treeadder`).
-3. Run the provided script:
-   ```bash
-   vsim -do run_treeAdder.tcl
