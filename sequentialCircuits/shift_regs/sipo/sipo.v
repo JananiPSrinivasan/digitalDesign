@@ -7,9 +7,9 @@ module sipo (
 
     always@(posedge clk) begin
         if (!rst_n)
-            q <= 4b'0000;
+            q <= 4'b0000;
         else
-            q<= {[2:0],serial_data_in};
+            q[3:0]<= {q[2:0],serial_data_in};
     end
 
 endmodule
