@@ -12,6 +12,7 @@
     "CRV": "checkbox",
     "Formal": "checkbox",
     "Combination Test": "checkbox",
-    "Version": "number"
+    "Version": "number",
+    "None": "checkbox"
   }
 }
