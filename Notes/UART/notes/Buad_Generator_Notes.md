@@ -50,14 +50,3 @@ If the user chooses **16x mode**, the duration of a single bit is mapped across 
     
 6. **Architecture Division:** In this SoC architecture, the **SystemVerilog RTL** defines the physical AHB bus slave logic, configuration registers, and counting engines, while the **C Firmware** provides runtime control by dynamically computing and injecting register settings over the bus.
 
-
-
-```
-module buad_gen(); 
-
-
-
-
-endmodule
-
-```

@@ -59,11 +59,11 @@ how many states?
 
 module uart_tx(
     input logic clk,
-	input bclk,
     input logic reset_n,
     // control signals
 	input logic cts_n, // clear to send
 	output logic rts_n, // request to send
+	input logic tx_valid,
 	
 	// Data reieved in parallel has to be transmitted serially
 	input logic [7:0]tx_hold_register, // 8 bit hold register, the data is held here
@@ -81,9 +81,10 @@ module uart_tx(
 	logic [3:0] cycle_counter, next_cycle_counter;
 	logic [2:0] bit_counter, next_bit_counter;
 	
+	
 	// temporary shift reg
-	logic [9:0] temp_piso = 10'd0;
-	logic [9:0] next_piso;
+	logic [7:0] temp_piso = 8'd0;
+	logic [7:0] next_piso;
 	
 
 	
@@ -93,7 +94,7 @@ module uart_tx(
 		START = 3'b001,
 		TRANSMIT = 3'b010,
 		STOP = 3'b011
-	}states_t;
+	}state_t;
 	
 	// State variables from state_t
 	
@@ -101,11 +102,11 @@ module uart_tx(
 	
 	// sequential logic to update curr_state
 	
-	always_ff begin 
+	always_ff @(posedge clk) begin 
 		if (!reset_n) begin 
 			curr_state <= IDLE;
-			temp_piso <= 10'd0;
-			cycle_counter <= 4'd16;
+			temp_piso <= 8'd0;
+			cycle_counter <= 4'd0;
 			bit_counter <= 3'd0;
 		end 
 		else begin
@@ -123,42 +124,41 @@ module uart_tx(
 		next_piso = temp_piso;
 		next_bit_counter = bit_counter;
 		next_cycle_counter = cycle_counter;
-		// Check for THR. if THR is zero, then Clear to send is high.
-		if (temp_piso == 8'd0) cts_n = 1'd1;
-		else cts_n = 1'd0;
+		
 		
 		case(curr_state) 
 			IDLE:begin 
 			
-				next_bit_counter = 4'd0;
-				next_cycle_counter = 5'd0;
-				if (!cts_n) next_state = START; 
+				next_bit_counter = 3'd0;
+				next_cycle_counter = 4'd0;
+				if (!cts_n && tx_valid) begin 
+					next_piso = tx_hold_register;
+					next_state = START; 
 				else next_state = IDLE;
+			end
 			end
 			START:begin
 			    if (bclk_pulse) begin 
 					if (cycle_counter == 4'd15) begin 
 						next_cycle_counter = 4'd0;
-						next_piso = temp_piso >> 1;
 						next_state = TRANSMIT;
-						cts_n = 1'd0;
-					end else cycle_counter = cycle_counter - 1'd1;
+					end else next_cycle_counter = cycle_counter + 1'd1;
 				end 			
 			end
-			TRANSMIT: 
+			TRANSMIT: begin
 				if (bclk_pulse) begin 
 					if (cycle_counter ==4'd15) begin 
 						next_cycle_counter = 4'd0;
-						if (bit_counter == 3'd8) begin 
+						if (bit_counter == 3'd7) begin 
 							next_state = STOP;
 							next_bit_counter = 3'd0;
 						end else begin 
 							next_piso = temp_piso >> 1;
-							bit_counter = bit_counter + 1'd1; 
+							next_bit_counter = bit_counter + 1'd1; 
 						end
-					end else cycle_counter = cycle_counter - 1'd1;
+					end else next_cycle_counter = cycle_counter + 1'd1;
 				end
-			begin
+			
 				
 			end
 			STOP: begin 
@@ -167,7 +167,7 @@ module uart_tx(
 						next_cycle_counter = 4'd0;
 						next_state = IDLE;
 					end else begin 
-						cycle_counter = cycle_counter - 1'd1;
+						next_cycle_counter = cycle_counter + 1'd1;
 					end
 					
 				end
@@ -186,7 +186,7 @@ module uart_tx(
 			STOP:tx_data = 1'b1;
 			default: tx_data = 1'b1;
 		endcase
-		assign rts_n = 1'b1;
+		rts_n = 1'b1;
 	end
 	
 	
