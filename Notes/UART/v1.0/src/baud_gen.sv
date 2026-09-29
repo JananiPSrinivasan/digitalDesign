@@ -14,7 +14,6 @@ module mod_gen #(parameter int DIVISOR = 977)(
 );
 
 
-
 logic [9:0] divisor;
 logic [9:0] bclk_counter;
 
@@ -34,7 +33,6 @@ always_ff @(posedge clk) begin
        end
     end
 end
-
 
 
 endmodule

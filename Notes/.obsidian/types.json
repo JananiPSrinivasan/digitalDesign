@@ -1,0 +1,17 @@
+{
+  "types": {
+    "aliases": "aliases",
+    "cssclasses": "multitext",
+    "tags": "tags",
+    "date": "date",
+    "Verification Environment": "checkbox",
+    "UVM": "checkbox",
+    "Cocotb": "checkbox",
+    "SystemC": "checkbox",
+    "Directed Test": "checkbox",
+    "CRV": "checkbox",
+    "Formal": "checkbox",
+    "Combination Test": "checkbox",
+    "Version": "number"
+  }
+}
