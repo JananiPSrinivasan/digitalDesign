@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 /* 1. BAUD  GENERATOR
 
 The baud genrator generates baud pulses. 

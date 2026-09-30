@@ -21,9 +21,9 @@ Combination_Test: false
 
 ## TEST PLAN
 
-| Test Name       | Test ID | Priority | Target Requirment | Pass/Fail Criteria | Observed result |
-| --------------- | ------- | -------- | ----------------- | ------------------ | --------------- |
-| Reset_Behaviour | 001     |          |                   |                    |                 |
+| Test Name       | Test ID | Priority | Target Requirment                      | Pass/Fail Criteria             | Observed result |
+| --------------- | ------- | -------- | -------------------------------------- | ------------------------------ | --------------- |
+| Reset_Behaviour | 001     |          | reset trigger must go from high to low | divisor counter resets to zero |                 |
 
 ## COVERAGE PLAN 
 
