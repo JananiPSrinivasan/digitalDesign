@@ -134,8 +134,8 @@ module uart_tx(
 				if (!cts_n && tx_valid) begin 
 					next_piso = tx_hold_register;
 					next_state = START; 
-				else next_state = IDLE;
-			end
+				end else next_state = IDLE;
+			//end
 			end
 			START:begin
 			    if (bclk_pulse) begin 
