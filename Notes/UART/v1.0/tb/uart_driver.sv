@@ -18,7 +18,7 @@ virtual uart_if vif; // virtual handle
 //so whenever the new function is called in the obeject with a value passed, 
 // it gets assigned to vif.
 
-function new(virtual uart_if pif) 
+function new(virtual uart_if pif); 
     this.vif = pif;
 endfunction
 

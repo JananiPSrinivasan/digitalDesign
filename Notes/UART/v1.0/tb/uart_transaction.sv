@@ -2,7 +2,7 @@ class uart_transaction;
 
     rand bit [7:0] data;
 
-    function void display(syting name); 
+    function void display(string name); 
         $display ("[%s] Data: 0x%0h", name, data);
     endfunction
 

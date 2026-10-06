@@ -57,7 +57,7 @@ how many states?
 	
 */	
 
-module uart_tx(
+module uart_tx_fin(
     input logic clk,
     input logic reset_n,
     // control signals
