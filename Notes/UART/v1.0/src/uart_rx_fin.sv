@@ -5,7 +5,7 @@ module uart_rx_fin(
     // control signals
     input logic rts_n,
     output logic cts_n,
-    input logic rx_valid,
+    output logic rx_valid,
 
     // Data received serially
     input logic rx_data,
@@ -27,7 +27,8 @@ module uart_rx_fin(
 
     // RX holding register
     logic [7:0] next_rx_hold_register;
-
+    // One-cycle data-valid pulse
+    logic next_rx_valid;
 
     // State declaration
     typedef enum logic [2:0] {
@@ -52,6 +53,7 @@ module uart_rx_fin(
             cycle_counter    <= 4'd0;
             bit_counter      <= 3'd0;
             rx_hold_register <= 8'd0;
+            rx_valid <= 1'b0;
         end
 
         else begin
@@ -60,6 +62,7 @@ module uart_rx_fin(
             cycle_counter    <= next_cycle_counter;
             bit_counter      <= next_bit_counter;
             rx_hold_register <= next_rx_hold_register;
+            rx_valid <= next_rx_valid;
         end
 
     end
@@ -77,6 +80,7 @@ module uart_rx_fin(
         next_bit_counter      = bit_counter;
         next_cycle_counter    = cycle_counter;
         next_rx_hold_register = rx_hold_register;
+        next_rx_valid = 1'b0;
 
 
         case (curr_state)
@@ -94,7 +98,7 @@ module uart_rx_fin(
                 // start bit.
                 //
                 // rx_valid is only READ by this module.
-                if (rx_valid && !rx_data) begin
+                if (!rx_data) begin
                     next_state         = START;
                     next_cycle_counter = 4'd0;
                 end
@@ -194,6 +198,7 @@ module uart_rx_fin(
                         // Valid UART stop bit must be HIGH.
                         if (rx_data) begin
                             next_rx_hold_register = temp_sipo;
+                            next_rx_valid = 1'b1;
                         end
 
                         next_state = IDLE;

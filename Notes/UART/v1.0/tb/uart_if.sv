@@ -7,6 +7,8 @@ interface uart_if;
     logic tx_valid;
     logic tx_data;
     logic rx_data;
+    logic rx_valid;                 
+    logic [7:0] rx_hold_register;   
 
     logic cts_n;
     logic rts_n;

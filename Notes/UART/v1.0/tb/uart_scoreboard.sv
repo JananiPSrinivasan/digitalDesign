@@ -34,7 +34,7 @@ class uart_scoreboard;
     covergroup uart_cg; 
     // Coverpoint 1 to Track every single state. 256 state because 0 to 255
         cp_data : coverpoint sampled_data {
-            bins all_values = {[0:255]};
+            bins all_values[]= {[0:255]};
         }
         
         cp_corners : coverpoint sampled_data{
@@ -63,6 +63,7 @@ class uart_scoreboard;
         if (expected_q.size()==0) begin 
             $display ("ERROR: Unexpected data seen on TX line");
             error_count++;
+            return;
         end
         
         expected_data = expected_q.pop_front();
