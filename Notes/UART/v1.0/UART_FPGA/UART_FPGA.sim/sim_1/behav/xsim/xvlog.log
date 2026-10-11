@@ -1,6 +1,0 @@
-INFO: [VRFC 10-2263] Analyzing SystemVerilog file "F:/CommunicationProtocols/digitalDesign/Notes/UART/v1.0/tb/uart_if.sv" into library xil_defaultlib
-INFO: [VRFC 10-2263] Analyzing SystemVerilog file "F:/CommunicationProtocols/digitalDesign/Notes/UART/v1.0/tb/uart_pkg.sv" into library xil_defaultlib
-INFO: [VRFC 10-2263] Analyzing SystemVerilog file "F:/CommunicationProtocols/digitalDesign/Notes/UART/v1.0/src/uart_tx_fin.sv" into library xil_defaultlib
-INFO: [VRFC 10-311] analyzing module uart_tx_fin
-INFO: [VRFC 10-2263] Analyzing SystemVerilog file "F:/CommunicationProtocols/digitalDesign/Notes/UART/v1.0/tb/uart_tx_tb.sv" into library xil_defaultlib
-INFO: [VRFC 10-311] analyzing module uart_tx_tb

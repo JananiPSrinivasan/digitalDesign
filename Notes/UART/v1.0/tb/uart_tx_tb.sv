@@ -100,15 +100,18 @@
         
 
         task uart_frame_check(input logic [7:0] expected_data); 
+            logic [7:0] captured_data;
             // check start bit
             wait(tx_if.tx_data == 1'b0);
             uart_bit_check(1'b0, "START BIT");
             // check data bits
             for (int i = 0; i < 8; i++) begin 
                 uart_bit_check(expected_data[i], $sformatf("DATA BIT %0d", i));
+                captured_data[i] = tx_if.tx_data;
             end
             // check stop bit
             uart_bit_check(1'b1, "STOP BIT");
+            sb.check_actual(captured_data);
         endtask
 
 
@@ -116,6 +119,7 @@
         // we need two objects 
         uart_transaction tx;
         uart_driver driver; // the object of driver class which has the drive taks in that
+        uart_scoreboard sb;
 
         // refer the driver file. 
         // uart driver needs an interface to drive the data
@@ -125,7 +129,8 @@
         // this task will send the data to the data tx hold register via the interface handle.
 
         initial begin 
-            driver = new(tx_if); // this tx_if becomes a virtual handle in the driver class
+            driver = new(tx_if);
+            sb = new(); // this tx_if becomes a virtual handle in the driver class
             validate_reset_n();
 
             fork 
@@ -135,6 +140,7 @@
             // Test case 1: Send a single byte of data
             tx = new(); 
             tx.data = 8'hA5; // Example data to send
+            sb.push_frame (tx.data);
             fork 
                 driver.drive (tx);
                 uart_frame_check(tx.data);
@@ -145,7 +151,7 @@
             //Test 2: send another byte of data
             tx = new();
             tx.data = 8'h3C;
-
+            sb.push_frame (tx.data);
             fork 
                 driver.drive (tx);
                 uart_frame_check(tx.data);
@@ -157,6 +163,7 @@
 
             tx = new();
             tx.data = 8'h00;
+            sb.push_frame (tx.data);
             fork 
                 driver.drive (tx);
                 uart_frame_check(tx.data);
@@ -167,6 +174,7 @@
 
             tx = new();
             tx.data = 8'hFF;
+            sb.push_frame(tx.data);
             fork 
                 driver.drive (tx);
                 uart_frame_check(tx.data);
@@ -174,6 +182,7 @@
             //Test 5: send random data
             tx = new();
             tx.data = $urandom_range(0, 255);
+            sb.push_frame (tx.data);
             fork 
                 driver.drive (tx);
                 uart_frame_check(tx.data);
@@ -183,6 +192,7 @@
             tx = new();
             for (int i = 0; i < 5; i++) begin
                 tx.data = $urandom_range(0, 255);
+                sb.push_frame (tx.data);
                 fork 
                     driver.drive (tx);
                     uart_frame_check(tx.data);
@@ -194,6 +204,7 @@
             tx = new();
             for (int i = 0; i < 5; i++) begin
                 tx.data = $urandom_range(0, 255);
+                sb.push_frame (tx.data);
                 fork 
                     driver.drive(tx);
                     uart_frame_check(tx.data);
@@ -201,13 +212,15 @@
                 repeat ($urandom_range(1, 10)) @(posedge clk); // Random delay between bytes
             end
             $display("All tests done");
+            sb.report();
             $finish;
         end
 
         // Waveform generation
         initial begin
+        
             $dumpfile("uart_tx_tb.vcd");
-            $dumpvars(0, uart_tx_tb);
+            $dumpvars(1, uart_tx_tb);
         end
 
     endmodule

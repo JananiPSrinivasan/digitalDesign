@@ -1,0 +1,19 @@
+cat << 'EOF' > .gitignore
+# Ignore Vivado temporary directories
+**/UART_FPGA.cache/
+**/UART_FPGA.sim/
+**/UART_FPGA.runs/
+**/UART_FPGA.hw/
+**/UART_FPGA.ip_user_files/
+
+# Ignore log files and waveforms
+*.log
+*.jou
+*.pb
+*.vcd
+*.wdb
+*.str
+
+# Ignore Obsidian editor layout history
+**/.obsidian/
+EOF
